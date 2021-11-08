@@ -63,5 +63,22 @@ describe("Async - N2_Ex1", () => {
     expect(console.log).toHaveBeenCalledWith(2, 'Bill Gates');
   });
 
+
+  // Test amb Fake Timers
+  test('obtenir objecte a partir del seu id', () => {
+    jest.useFakeTimers();
+    jest.spyOn(global, 'setTimeout');
+    const employees = [
+      {id: 1, name: 'Linux Torvalds'}, 
+      {id: 2, name: 'Bill Gates'},
+      {id: 3, name: 'Jeff Bezos'}
+    ];
+    expect(getEmployee2(1)).resolves.toStrictEqual({id: 1, name: 'Linux Torvalds'});
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 2000);
+    jest.useRealTimers();
+  });
+
+
 });
 
