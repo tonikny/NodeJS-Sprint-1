@@ -15,20 +15,19 @@ beforeEach(() => {
   mockDirNom.mockClear();
 });
 
-it('The consumer should be able to call new() on Persona', () => {
+test('UsaPersones pot fer new() sense errors', () => {
   const usaPersones = new UsaPersones();
   expect(usaPersones).toBeTruthy(); // Constructor ran with no errors
 });
 
-it('We can check if the consumer called the class constructor', () => {
+test('Si no hi ha parametres no es crida a Persona i si nhi ha, si', () => {
   let usaPersones = new UsaPersones();
-  expect(Persona).not.toHaveBeenCalled(); // ensure our mockClear() is working
+  expect(Persona).not.toHaveBeenCalled();
   usaPersones = new UsaPersones(["Toni", "Pep"]);
   expect(Persona).toHaveBeenCalled();
 });
 
-it('We can check if the consumer called a method on the class instance', () => {
-  //const consoleSpy = jest.spyOn(console, 'log');
+test('Es crida a dirNom() un cop per cada item de la llista', () => {
   const llista = ["Toni", "Pep", "Pere"];
   const usaPersones = new UsaPersones(llista);
   usaPersones.llistaPersones();

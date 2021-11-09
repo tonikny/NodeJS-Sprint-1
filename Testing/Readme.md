@@ -7,3 +7,4 @@ Testing
   * Testejar Async/await i Fake timers (Async.js, Async.test.js)
 * **Nivell 2**
   * Testejar classe Persona amb mock (Persona.js, UsaPersones.js, UsaPersones.test.js)
+  * 
