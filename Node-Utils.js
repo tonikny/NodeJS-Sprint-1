@@ -65,10 +65,11 @@ function escriu (frase) {
 
 /** Prova d'execució */ 
 //comprimeix();
-
 function llista() {
+  const os = require('os');
   const { exec } = require('child_process');
-  exec('ls --color', (error, stdout, stderr) => {
+
+  exec('dir ' + os.homedir(), (error, stdout, stderr) => {
     if (error) {
       console.error(error.message);
       return;
