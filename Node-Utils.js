@@ -3,10 +3,11 @@
  * Nivell 1 Exercici 1
  */
 
+const { rejects } = require('assert');
+
 function missatges(missatge) {
   timerID = setInterval(() => console.log(missatge), 1000);
 }
-
 /** Prova d'execució */ 
 //missatges('provant ...')
 
@@ -15,56 +16,52 @@ function missatges(missatge) {
  * Nivell 1 Exercici 2
  */
 
-function escriu (frase) {
+function escriu (frase, file) {
   const fs = require('fs');
-  fs.writeFile('node_utils.txt',frase,'utf8',(err)=>{
-    if (err) console.log(err);
-    else console.log('Frase escrita.');
-  });
+  fs.writeFileSync(file,frase,'utf8');
+  console.log('Arxiu escrit:', file, frase);
 }
-
 /** Prova d'execució */ 
-//escriu('Frase de prova');
+//escriu('Frase de prova','node_utils.txt');
 
 
 /**
  * Nivell 1 Exercici 3
  */
 
- function llegeix () {
+function llegeix (file) {
   const fs2 = require('fs');
-  fs2.readFile('node_utils.txt','utf8',(err, data)=>{
-    if (err) console.log(err);
-    else console.log('Frase llegida:', data);
-  });
- }
-
+  const res = fs2.readFileSync(file,'utf8');
+  console.log('Arxiu llegit:',file, res);
+  return res;
+}
 /** Prova d'execució */ 
-//llegeix();
+//console.log('Retorna:', llegeix('node_utils.txt'));
 
 
- /**
+/**
  * Nivell 2 Exercici 1
  */
   
-  function comprimeix () {
-    const fs3 = require('fs');
-    const zlib = require("zlib");
-    const dades = fs3.readFileSync('node_utils.txt','utf8');
-    zlib.gzip(dades, (err, buffer) => {
-      if (!err) {
-        //console.log(buffer.toString('base64'));
-        fs3.writeFile('node_utils.txt.gz', buffer,'utf8',(err)=>{
-          if (err) console.log(err);
-          else console.log('Dades comprimides...');
-        });
-      }
-      else console.log(err);
-    });
-  }
-
+function comprimeix (file) {
+  const fs3 = require('fs');
+  const zlib = require("zlib");
+  const dades = fs3.readFileSync(file,'utf8');
+  zlib.gzip(dades, (err, buffer) => {
+    if (!err) {
+      //console.log(buffer.toString('base64'));
+      fs3.writeFile(file+'.gz', buffer,'utf8',(err)=>{
+        if (err) console.log(err);
+        else console.log('Dades comprimides...');
+      });
+    }
+    else console.log(err);
+  });
+}
 /** Prova d'execució */ 
-//comprimeix();
+//comprimeix('node_utils.txt');
+
+
 function llista() {
   const os = require('os');
   const { exec } = require('child_process');
@@ -81,8 +78,5 @@ function llista() {
     console.log(stdout);
   });
 }
-
 /** Prova d'execució */ 
 //llista()
-
-
