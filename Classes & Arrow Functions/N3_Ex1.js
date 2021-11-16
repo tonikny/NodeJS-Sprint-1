@@ -10,8 +10,12 @@ class Abs {
 
 // Classe concreta
 class Miclasse extends Abs {
+  constructor(nom) {
+    super();
+    this.nom = nom;
+  }
   saluda() {
-    console.log('Hola');
+    console.log('Hola', this.nom);
   }
 }
 
@@ -24,10 +28,10 @@ function creaObjecteAbs () {
   }
 }
 
-function creaObjecteMiclasse () {
+function creaObjecteMiclasse (nom) {
   try {
     // instanciar classe concreta
-    const mc = new Miclasse();
+    const mc = new Miclasse(nom);
     console.log('Miclasse instanciada');
     return mc;
   } catch (err) {
@@ -36,5 +40,8 @@ function creaObjecteMiclasse () {
 }
 
 const abs = creaObjecteAbs();
-const mic = creaObjecteMiclasse();
-mic.saluda();
+const obj1 = creaObjecteMiclasse('Toni');
+const obj2 = creaObjecteMiclasse('Omar');
+
+obj1.saluda();
+obj2.saluda();
