@@ -21,12 +21,21 @@ let salaries = [{
 }];
 
 let getEmployee = (id) => {
-  return new Promise ((resolv, reject) => {
+  return new Promise ((resolve, reject) => {
     let obj = employees.find(o => o.id === id);
-    if (obj) resolv(obj);
-    else reject();
+    if (obj) resolve(obj);
+    else reject('Problemes ...');
   });
 }
 
 getEmployee(3)
-  .then(res=>console.log(res));
+  .then(res => console.log(res))
+  .catch(rej => {
+    console.log(rej);
+  });
+
+getEmployee(4)
+  .then(res => console.log(res))
+  .catch(rej => {
+    console.log(rej);
+  });

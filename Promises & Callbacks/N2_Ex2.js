@@ -26,12 +26,25 @@ let obj = {
 }
 
 let getSalary = (emp) => {
-  return new Promise ((resolv, reject) => {
-    let sal = salaries.find(o => o.id === emp.id).salary;
-    if (sal) resolv(sal);
-    else reject();
+  return new Promise ((resolve, reject) => {
+    try {
+      let sal = salaries.find(o => o.id === emp.id).salary;
+      if (sal) resolve(sal);
+    } finally {
+      reject('Problemes ...');
+    }
   });
 }
 
 getSalary(obj)
-  .then(res=>console.log(res));
+  .then(res=>console.log(res))
+  .catch(rej => {
+    console.log(rej);
+  });
+
+getSalary(undefined)
+  .then(res=>console.log(res))
+  .catch(rej => {
+    console.log(rej);
+  });
+
